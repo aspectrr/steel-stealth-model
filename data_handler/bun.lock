@@ -4,11 +4,13 @@
     "": {
       "name": "data_handler",
       "dependencies": {
+        "@duckdb/node-api": "^1.3.2-alpha.26",
         "drizzle-orm": "^0.44.5",
         "duckdb": "^1.3.2",
         "parquetjs-lite": "^0.8.7",
         "pg": "^8.16.3",
         "postgres": "^3.4.7",
+        "waddler": "^0.1.1",
       },
       "devDependencies": {
         "@types/bun": "latest",
@@ -21,6 +23,20 @@
   },
   "packages": {
     "@drizzle-team/brocli": ["@drizzle-team/brocli@0.10.2", "", {}, "sha512-z33Il7l5dKjUgGULTqBsQBQwckHh5AbIuxhdsIxDDiZAzBOrZO6q9ogcWC65kU382AfynTfgNumVcNIjuIua6w=="],
+
+    "@duckdb/node-api": ["@duckdb/node-api@1.3.2-alpha.26", "", { "dependencies": { "@duckdb/node-bindings": "1.3.2-alpha.26" } }, "sha512-2gLtgJaiguAuPbXuS4NCthbIfEHo72FIF9514FKxg7sYY0gGJP1DgCpvBKdisyhWtBkNJ+jjn2p2PmRqkgZabQ=="],
+
+    "@duckdb/node-bindings": ["@duckdb/node-bindings@1.3.2-alpha.26", "", { "optionalDependencies": { "@duckdb/node-bindings-darwin-arm64": "1.3.2-alpha.26", "@duckdb/node-bindings-darwin-x64": "1.3.2-alpha.26", "@duckdb/node-bindings-linux-arm64": "1.3.2-alpha.26", "@duckdb/node-bindings-linux-x64": "1.3.2-alpha.26", "@duckdb/node-bindings-win32-x64": "1.3.2-alpha.26" } }, "sha512-066o5XrzesZnF/qhNlpmFwDxvIXNYQWr48bjw/ecyLfUcpcvqE0MyL1/zV5oScfcf7hSd/dSntRVzUnQmJCwXg=="],
+
+    "@duckdb/node-bindings-darwin-arm64": ["@duckdb/node-bindings-darwin-arm64@1.3.2-alpha.26", "", { "os": "darwin", "cpu": "arm64" }, "sha512-SioksFdehT2TWuGx6otWM2bCJ6kjD4Nq9r6xHCA4gvko1MBESIm+XhwvwcnGx2IaXTzKRZ+DPxNTPobPX18lpQ=="],
+
+    "@duckdb/node-bindings-darwin-x64": ["@duckdb/node-bindings-darwin-x64@1.3.2-alpha.26", "", { "os": "darwin", "cpu": "x64" }, "sha512-RZ1n2Vtzit8YLl9kjfuH17nZd5MOLZoWTlDo0rv2EuIgslC7XLbxK3ZH6jiUQ+VEGRZAjXWvwtPOFNvQQ3+LhQ=="],
+
+    "@duckdb/node-bindings-linux-arm64": ["@duckdb/node-bindings-linux-arm64@1.3.2-alpha.26", "", { "os": "linux", "cpu": "arm64" }, "sha512-vhHmoiQpkeXb0PbhsLEEmulG05BxO1elNhHVMLobdAwVfoGEPE3fZkH4bPgvTGywwZC7ccqMFwMjYTTOIIJvLg=="],
+
+    "@duckdb/node-bindings-linux-x64": ["@duckdb/node-bindings-linux-x64@1.3.2-alpha.26", "", { "os": "linux", "cpu": "x64" }, "sha512-tLzo/lGu5DXrDZhogI8N9ohhByU8UzGnBFFE/0blBuZ/g5SonvTL0yq1zE/NCkLSmDSBtqibz3ehZ1rZuBBQTQ=="],
+
+    "@duckdb/node-bindings-win32-x64": ["@duckdb/node-bindings-win32-x64@1.3.2-alpha.26", "", { "os": "win32", "cpu": "x64" }, "sha512-wNZmvYgnkUS3/pC9RQNO6yJeI8EANxB5LAyERJMHtMKrF6LB1nTEYmFbSlVJQ9n10qtNxKv/fF47AAAovOnG6g=="],
 
     "@esbuild-kit/core-utils": ["@esbuild-kit/core-utils@3.3.2", "", { "dependencies": { "esbuild": "~0.18.20", "source-map-support": "^0.5.21" } }, "sha512-sPRAnw9CdSsRmEtnsl2WXWdyquogVpB3yZ3dgwJfe8zrOzTsV7cJvmwrKVa+0ma5BoiGJ+BoqkMvawbayKUsqQ=="],
 
@@ -335,6 +351,8 @@
     "util-deprecate": ["util-deprecate@1.0.2", "", {}, "sha512-EPD5q1uXyFxJpCrLnCc1nHnq3gOa6DZBocAIiI2TaSCA7VCJ1UJDMagCzIkXNsUYfD1daK//LTEQ8xiIbrHtcw=="],
 
     "varint": ["varint@5.0.2", "", {}, "sha512-lKxKYG6H03yCZUpAGOPOsMcGxd1RHCu1iKvEHYDPmTyq2HueGhD73ssNBqqQWfvYs04G9iUFRvmAVLW20Jw6ow=="],
+
+    "waddler": ["waddler@0.1.1", "", { "peerDependencies": { "@clickhouse/client": "^1.11.2", "@duckdb/node-api": "^1.1.2-alpha.4", "@electric-sql/pglite": "^0.2.17", "@libsql/client": "^0.15.4", "@libsql/client-wasm": "^0.15.4", "@neondatabase/serverless": "^1.0.0", "@planetscale/database": "^1.19.0", "@tidbcloud/serverless": "^0.2.0", "@vercel/postgres": "^0.10.0", "@xata.io/client": "^0.30.1", "better-sqlite3": "^11.9.1", "bun-types": "*", "duckdb": "^1.2.1", "gel": "^2.0.2", "mysql2": "^3.14.0", "pg": "^8.14.0", "pg-query-stream": "^4.8.0", "postgres": "^3.4.5" }, "optionalPeers": ["@clickhouse/client", "@duckdb/node-api", "@electric-sql/pglite", "@libsql/client", "@libsql/client-wasm", "@neondatabase/serverless", "@planetscale/database", "@tidbcloud/serverless", "@vercel/postgres", "@xata.io/client", "better-sqlite3", "bun-types", "duckdb", "gel", "mysql2", "pg", "pg-query-stream", "postgres"] }, "sha512-lBJXYFBLEpYe+scAeCJmLj6Iqweuq1whM6Am3I9WfopOCFxvKz8Nq5hXoy8/b3zwJqHIQMglFIvM4skRydSpZg=="],
 
     "webidl-conversions": ["webidl-conversions@3.0.1", "", {}, "sha512-2JAn3z8AR6rjK8Sm8orRC0h/bcl/DqL7tRPdGZ4I1CjdF+EaMLmYxBHyXuKL849eucPFhvBoxMsflfOb8kxaeQ=="],
 

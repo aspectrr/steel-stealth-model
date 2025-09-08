@@ -7,15 +7,15 @@ import fs from "fs";
 import { sourceTable } from "./schema";
 
 const PG_CONFIG = {
-  host: "source_host",
-  database: "source_db",
-  user: "username",
-  password: "password",
-  port: 5432,
+  host: process.env.HOST || "localhost",
+  database: process.env.DATABASE || "postgres",
+  user: process.env.USERNAME || "postgres",
+  password: process.env.PASSWORD || "postgres",
+  port: parseInt(process.env.PORT! || "5432"),
 };
 
 const DATA_DIR = path.resolve(__dirname, "../data");
-const DUCKDB_FILE = path.join(DATA_DIR, "ml_data.duckdb");
+const DUCKDB_FILE = path.join(DATA_DIR, "session_data.duckdb");
 const LAST_TIMESTAMP_FILE = path.join(DATA_DIR, "last_timestamp.txt");
 
 // --- Helper functions to store/retrieve last timestamp ---
@@ -80,7 +80,7 @@ async function main() {
   // Create table if it doesn't exist
   await new Promise<void>((resolve, reject) => {
     conn.run(
-      `CREATE TABLE IF NOT EXISTS ml_data (
+      `CREATE TABLE IF NOT EXISTS sessions_data (
         id BIGINT,
         name VARCHAR,
         value BIGINT,
@@ -93,7 +93,7 @@ async function main() {
   // Append new rows from Parquet
   await new Promise<void>((resolve, reject) => {
     conn.run(
-      `INSERT INTO ml_data SELECT * FROM read_parquet('${tempParquet}')`,
+      `INSERT INTO sessions_data SELECT * FROM read_parquet('${tempParquet}')`,
       (err) => (err ? reject(err) : resolve()),
     );
   });
@@ -109,13 +109,16 @@ async function main() {
 
   // 6. Optional: verify total rows
   await new Promise<void>((resolve, reject) => {
-    conn.all("SELECT COUNT(*) AS total_rows FROM ml_data", (err, result) => {
-      if (err) reject(err);
-      else {
-        console.log("Total rows in DuckDB:", result[0].total_rows);
-        resolve();
-      }
-    });
+    conn.all(
+      "SELECT COUNT(*) AS total_rows FROM sessions_data",
+      (err, result) => {
+        if (err) reject(err);
+        else {
+          console.log("Total rows in DuckDB:", result[0].total_rows);
+          resolve();
+        }
+      },
+    );
   });
 
   // 7. Clean up temp file and close connections
